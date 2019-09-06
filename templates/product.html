@@ -1,0 +1,36 @@
+<html>
+
+
+<body>
+   
+    <a href = "{{url_for('newProduct', supplement_id = supplement.id) }}">
+        <br/>
+        Create New Product</a>
+        <br/>
+
+<h1>{{supplement.name}}</h1>
+
+
+{% for i in products %}
+
+<div>
+
+<p>{{i.name}}</p>
+<p>{{i.description}}</p>
+<p> {{i.price}} </p>
+
+<a href="{{url_for('editProduct', supplement_id = supplement.id, product_id = i.id) }}"> Edit </a>
+<br/>
+<a href="{{url_for('deleteProduct', supplement_id = supplement.id, product_id = i.id) }}"> Delete </a>
+
+<br/>
+
+
+
+<!--INSERT YOUR CODE HERE -->
+
+
+{% endfor %}
+</body>
+
+</html>

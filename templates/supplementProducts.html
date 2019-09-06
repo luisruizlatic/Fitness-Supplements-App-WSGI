@@ -1,0 +1,36 @@
+{% extends "header.html" %} {% block content %}
+<div>
+    <div class="bg-image" style="background-image: url(/static/images/BodyBackground.jpg)"></div>
+    <div class="content">
+        <div class="supplementsList">
+            <h1 class="listTitle">SUPPLEMENTS {% if user_id != 0 %}
+                <a class="addNewButton" href="{{url_for('newSupplement')}} ">&nbsp;Add New</a>{% endif %}
+            </h1>
+            <ul class="nobull">
+                {% for i in supplements %}
+                <li>
+                    <a href="{{url_for('supplementProducts', supplement_id = i.id)}}">{{i.name}}</a>{% if user_id == i.user_id %}&nbsp; - &nbsp;
+                    <a class="editButton" href="{{url_for('editSupplement', supplement_id=i.id)}}">Edit </a> {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="verticalLine"></div>
+        <div class="productsList">
+            <h1 class="listTitle">{{selectedSupplement.name}} {% if user_id != 0 %}
+                <a class="addNewButton" href="{{url_for('newProduct', supplement_id=selectedSupplement.id)}} ">&nbsp;Add New Product </a> &nbsp; {% endif %}
+            </h1>
+            <ul class="nobull">
+                {% for i in products %}
+                <li>
+                    <a href="{{url_for('productInformation', supplement_id=selectedSupplement.id, product_id = i.id)}} ">{{i.name}}</a> {% if user_id == i.user_id %}&nbsp; - &nbsp;
+                    <a class="editButton" href="{{url_for('editProduct', supplement_id=selectedSupplement.id, product_id = i.id)}}">Edit </a> &nbsp;
+                    <a class="deleteButton" href="{{url_for('deleteProduct',supplement_id=selectedSupplement.id, product_id = i.id)}} ">Delete </a> {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

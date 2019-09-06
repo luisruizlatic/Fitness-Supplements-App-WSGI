@@ -1,0 +1,16 @@
+{% extends "header.html" %} {% block content %}
+<div>
+    <div class="bg-image" style="background-image: url(/static/images/BodyBackground.jpg)"></div>
+    <div class="contentProductDescription">
+        <div style="text-align: center;  align-items: center;justify-content: center;">
+            <h1 class="listTitle">{{product.name}}</h1>
+            {% if product.videoURL is not none %}
+            <iframe class="videoDescription" allowfullscreen="allowfullscreen" src="{{product.videoURL}}"></iframe> {% endif %}
+        </div>
+
+        <p class="productDescrition">{{product.description}}</p>
+
+    </div>
+</div>
+
+{% endblock %}

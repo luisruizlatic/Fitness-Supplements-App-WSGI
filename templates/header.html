@@ -1,0 +1,35 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+</head>
+
+<body>
+
+    <div class="header">
+
+        <a href="{{url_for('allSupplements')}}">
+            <img class="headerLogo" src="/static/images/FintessSupplementsLogo.png"></img>
+        </a>
+        <div class="loginButton">
+            <img class="loginIcon" src="/static/images/LoginIcon.png"></img>
+            <div style="width: 10px; float: left;"></div>
+            {% if user_id == 0 %}
+            <a class='loginLink' href="{{url_for('showLogin')}}">Login</a> {% else %}
+            <a class='loginLink' href="{{url_for('logout')}}">Logout</a> {% endif %}
+        </div>
+    </div>
+    <hr class="horizontalLine">
+    </hr>
+    {% block content %} {% endblock %} {% with messages = get_flashed_messages() %} {% if messages %}
+    <script>
+        //========Displays Flash Messages on Alert Box===============
+        '{% for message in messages %}'
+        alert('{{ message }}');
+        '{% endfor %}'
+    </script>
+    {% endif %} {% endwith %}
+
+</body>
+
+</html>

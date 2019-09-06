@@ -1,0 +1,223 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
+    </script>
+    <script src="https://apis.google.com/js/platform.js?onload=start">
+    </script>
+    <script>
+        gapi.load('auth2', function() {
+            auth2 = gapi.auth2.init({
+                client_id: '705825964174-7rtumc9tfaslpdlhk8lajatav195r0co.apps.googleusercontent.com',
+                // Scopes to request in addition to 'profile' and 'email'
+                //scope: 'additional_scope'
+            });
+        });
+    </script>
+
+    <!--FACEBOOK SIGN IN -->
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId: '415262372442965',
+                cookie: true, // enable cookies to allow the server to access 
+                // the session
+                xfbml: true, // parse social plugins on this page
+                version: 'v2.8' // use version 2.2
+            });
+        };
+        // Load the SDK asynchronously
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+        // Here we run a very simple test of the Graph API after login is
+        // successful.  See statusChangeCallback() for when this call is made.
+        function sendTokenToServer() {
+            var access_token = FB.getAuthResponse()['accessToken'];
+            console.log(access_token)
+            console.log('Welcome!  Fetching your information.... ');
+            FB.api('/me', function(response) {
+                console.log('Successful login for: ' + response.name);
+                $.ajax({
+                    type: 'POST',
+                    url: '/fbconnect?state={{STATE}}',
+                    processData: false,
+                    data: access_token,
+                    contentType: 'application/octet-stream; charset=utf-8',
+                    success: function(result) {
+                        // Handle or verify the server response if necessary.
+                        if (result) {
+                            $('#result').html('Login Successful!</br>' + result + '</br>Redirecting...')
+                            setTimeout(function() {
+                                window.location.href = "/";
+                            }, 4000);
+
+                        } else {
+                            $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+                        }
+                    }
+
+                });
+            });
+        }
+    </script>
+
+
+</head>
+
+
+<body>
+    <div class="bg-image" style="background-image: url(/static/images/BodyBackground.jpg)"></div>
+    <div class="content" style="width: 300px;">
+        <h1 style='font-family: "Helvetica neue", Helvetica Neue, Helvetica, Arial, sans-serif;'>Sign-In</h1>
+        <br/>
+
+        <div>
+            <!-- <button scope="public_profile,email" onlogin="checkLoginState();" class="loginBtn loginBtn--facebook">             
+                <a href='javascript:sendTokenToServer()'>Login with Facebook</a>
+              </button>-->
+            <button class="loginBtn loginBtn--facebook"><fb:login-button height='100%' scope="public_profile,email" onlogin="sendTokenToServer();">
+          <a href='javascript:sendTokenToServer()'>Login with Facebook</a>         
+          </fb:login-button>         
+          
+                  </button>
+
+            <button id="signinButton" class="loginBtn loginBtn--google">
+                Login with Google
+              </button>
+        </div>
+        <br/>
+        <br/>
+        <div id="result"></div>
+
+
+    </div>
+    </div>
+
+
+    </div>
+
+    <script>
+        /*GOOGLE LOGIN METHODS*/
+        $('#signinButton').click(function() {
+
+            auth2.grantOfflineAccess({
+                'redirect_uri': 'postmessage'
+            }).then(signInCallback);
+        });
+
+        function signInCallback(json) {
+            console.log('inside callback fuction');
+            console.log(json);
+            // authResult = JSON.parse(json);
+            authResult = json;
+            if (authResult['code']) {
+                // Hide the sign-in button now that the user is authorized, for example:
+                $('#signinButton').attr('style', 'display: none');
+                $.ajax({
+                    type: 'POST',
+                    url: '/gconnect?state={{STATE}}',
+                    processData: false,
+                    data: authResult['code'],
+                    contentType: 'application/octet-stream; charset=utf-8',
+                    success: function(result) {
+                        // Handle or verify the server response if necessary.
+                        if (result) {
+                            $('#result').html('Login Successful!</br>' + result + '</br>Redirecting...')
+                            setTimeout(function() {
+                                window.location.href = "/";
+                            }, 4000);
+
+                        } else if (authResult['error']) {
+                            console.log('There was an error: ' + authResult['error']);
+                        } else {
+                            $('#result').html('Failed to make a server-side call. Check your configuration and console.');
+                        }
+                    }
+
+                });
+            }
+        }
+    </script>
+
+    <style>
+        /* Shared */
+        
+        .loginBtn {
+            box-sizing: border-box;
+            position: relative;
+            /* width: 13em;  - apply for fixed size */
+            margin: 0.2em;
+            padding: 0 15px 0 46px;
+            border: none;
+            text-align: left;
+            line-height: 34px;
+            white-space: nowrap;
+            border-radius: 0.2em;
+            font-size: 11px;
+            color: #FFF;
+            width: 200px;
+            height: 33px;
+            font-weight: bold;
+        }
+        
+        .loginBtn:before {
+            content: "";
+            box-sizing: border-box;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 34px;
+            height: 100%;
+        }
+        
+        .loginBtn:focus {
+            outline: none;
+        }
+        
+        .loginBtn:active {
+            box-shadow: inset 0 0 0 32px rgba(0, 0, 0, 0.1);
+        }
+        /* Facebook */
+        
+        .loginBtn--facebook {
+            background-color: #4C69BA;
+            background-image: linear-gradient(#4C69BA, #3B55A0);
+            /*font-family: "Helvetica neue", Helvetica Neue, Helvetica, Arial, sans-serif;*/
+            text-shadow: 0 -1px 0 #354C8C;
+        }
+        
+        .loginBtn--facebook:before {
+            border-right: #364e92 1px solid;
+            background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_facebook.png') 6px 6px no-repeat;
+        }
+        
+        .loginBtn--facebook:hover,
+        .loginBtn--facebook:focus {
+            background-color: #5B7BD5;
+            background-image: linear-gradient(#5B7BD5, #4864B1);
+        }
+        /* Google */
+        
+        .loginBtn--google {
+            /*font-family: "Roboto", Roboto, arial, sans-serif;*/
+            background: #DD4B39;
+        }
+        
+        .loginBtn--google:before {
+            border-right: #BB3F30 1px solid;
+            background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_google.png') 6px 6px no-repeat;
+        }
+        
+        .loginBtn--google:hover,
+        .loginBtn--google:focus {
+            background: #E74B37;
+        }
+    </style>
+</body>

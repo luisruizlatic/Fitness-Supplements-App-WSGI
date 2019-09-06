@@ -1,0 +1,17 @@
+{% extends "header.html" %} {% block content %}
+<div>
+    <div class="bg-image" style="background-image: url(/static/images/BodyBackground.jpg)"></div>
+    <div class="content" style="width: 300px;top: 430px;">
+        <div class="supplementsList">
+            <h1 class="listTitle">Edit Supplement</h1>
+            <form action="{{url_for('editSupplement', supplement_id=supplement.id)}}" method='POST'>
+                <p>Name:</p>
+                <input type='text' placeholder="{{ supplement.name }}" value="{{ supplement.name }}" size='40' maxlength="50" name='name' required>
+                <br/>
+                <br/>
+                <input type='submit' value='Edit'>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

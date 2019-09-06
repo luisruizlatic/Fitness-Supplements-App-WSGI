@@ -1,0 +1,26 @@
+{% extends "header.html" %} {% block content %}
+<div>
+    <div class="bg-image" style="background-image: url(/static/images/BodyBackground.jpg)"></div>
+    <div class="content" style="width: 300px;top: 430px;">
+        <div class="supplementsList">
+            <h1 class="listTitle">New Product</h1>
+            <form action="{{url_for('newProduct', supplement_id=supplement_id )}}" method='POST'>
+                <p>Name:</p>
+                <input type='text' size='40' maxlength="50" name='name' required>
+                <p>Price:</p>
+                <input type='number' step=".01" size='40' maxlength="5" name='price' required>
+                <p>Manufacturer:</p>
+                <input type='text' size='40' maxlength="50" name='manufacturer'>
+                <p>Youtube Video URL:</p>
+                <input type='url' size='40' maxlength="240" name='videoURL' required>
+                <p>Description:</p>
+                <textarea style="overflow:auto;resize:none; width: 306px; height: 100px;" maxlength="240" name="description" required></textarea>
+                <br/>
+                <br/>
+                <input type='submit' value='Add'>
+            </form>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
