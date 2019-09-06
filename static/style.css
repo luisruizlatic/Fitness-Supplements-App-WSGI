@@ -1,0 +1,270 @@
+body {
+    margin: 0;
+}
+
+.headerLogo {
+    margin-left: 8%;
+    float: left;
+    height: 100%;
+    width: 130px;
+}
+
+.loginButton {
+    float: right;
+    margin-right: 8%;
+    margin-top: 30px;
+}
+
+.header {
+    height: 110px;
+    width: 100%;
+    background-color: white;
+}
+
+.supplementsList {
+    float: left;
+    font-size: 16px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    list-style-type: none;
+    align-items: left;
+    text-align: left;
+}
+
+.productsList {
+    float: left;
+    font-size: 16px;
+    margin-left: 10px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    list-style-type: none;
+    text-align: left;
+}
+
+.nobull {
+    list-style-type: none;
+    color: white;
+}
+
+.verticalLine {
+    border-left: 3px solid white;
+    height: 230px;
+    float: left;
+    margin-top: 8;
+    margin-bottom: 0;
+    margin-left: 8%;
+}
+
+.listTitle {
+    margin-left: 20px;
+    margin-top: 5px;
+    font-size: 23px;
+}
+
+.loginIcon {
+    float: left;
+    height: 47px;
+}
+
+.loginLink {
+    margin-top: 10px;
+    float: right;
+    font-size: 17px;
+    color: black;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.horizontalLine {
+    display: block;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    margin-top: auto;
+    margin-bottom: auto;
+    overflow: hidden;
+    border-style: inset;
+    border-width: 1px;
+    background-color: #F7C930;
+}
+
+.bg-image {
+    /* The image used */
+    /*background-image: url("/static/images/BodyBackground.jpg");*/
+    /* Add the blur effect */
+    filter: blur(3px);
+    -webkit-filter: blur(3px);
+    /* Full height */
+    height: 100%;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.content {
+    color: white;
+    font-weight: bold;
+    border: 2px solid #f1f1f1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 80%;
+    padding: 20px;
+    text-align: center;
+    filter: alpha(opacity=80);
+    opacity: 0.9;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.productDescrition {
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+    float: left;
+}
+
+.contentProductDescription {
+    color: white;
+    font-weight: bold;
+    border: 2px solid #f1f1f1;
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 80%;
+    padding: 20px;
+    text-align: center;
+    filter: alpha(opacity=80);
+    opacity: 0.9;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.videoDescription {
+    width: "360";
+    height: "200";
+    float: left;
+}
+
+textarea {
+    resize: none;
+}
+
+input:invalid {
+    border: 0.5px solid red;
+}
+
+input:valid {
+    border: 1px solid black;
+}
+
+textarea:invalid {
+    border: 0.5px solid red;
+}
+
+textarea:valid {
+    border: 1px solid black;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    background-color: black;
+    color: black;
+    border-style: outset;
+    border-width: 2px;
+    border-color: white;
+    color: white;
+    opacity: 0.9;
+}
+
+.productDescrition {
+    font-size: 16px;
+    margin-left: 20px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    list-style-type: none;
+    text-align: justify;
+    font-size: 13px;
+    margin-left: 10px;
+}
+
+.contentProductDescription {
+    color: white;
+    font-weight: bold;
+    border: 2px solid #f1f1f1;
+    position: absolute;
+    top: 380px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 350px;
+    padding: 20px;
+    text-align: center;
+    filter: alpha(opacity=80);
+    opacity: 0.9;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.videoDescription {
+    width: "360";
+    height: "200";
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+    margin-left: 27px;
+}
+
+li {
+    list-style-type: none;
+    color: white;
+}
+
+.addNewButton {
+    color: white;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.addNewButton:hover {
+    background-color: rgb(79, 121, 77);
+    color: white;
+    border-style: outset;
+    border-width: 2px;
+    border-color: white;
+    color: white;
+    opacity: 0.9;
+}
+
+.deleteButton {
+    color: white;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.deleteButton:hover {
+    background-color: red;
+    color: white;
+    border-style: outset;
+    border-width: 2px;
+    border-color: white;
+    color: white;
+    opacity: 0.9;
+}
+
+.editButton {
+    color: white;
+    text-decoration: none;
+    font-size: 12px;
+}
+
+.editButton:hover {
+    background-color: blue;
+    color: white;
+    border-style: outset;
+    border-width: 2px;
+    border-color: white;
+    color: white;
+    opacity: 0.9;
+}
